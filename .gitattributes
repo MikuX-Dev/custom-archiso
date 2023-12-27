@@ -1,0 +1,1 @@
+profile/airootfs/etc/skel/bin/bin/scripts/pomatez filter=lfs diff=lfs merge=lfs -text
