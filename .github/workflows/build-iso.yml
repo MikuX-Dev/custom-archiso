@@ -24,7 +24,7 @@ jobs:
       - run: cat /etc/os-release
       - run: pacman-key --init
       - run: pacman --noconfirm -Sy archlinux-keyring
-      - run: ./build_iso.sh
+      - run: ./build-iso.sh
       - uses: actions/upload-artifact@v3
         with:
           name: Arch Live ISO
