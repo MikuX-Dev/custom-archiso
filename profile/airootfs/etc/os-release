@@ -1,0 +1,12 @@
+NAME="ArchFiery"
+PRETTY_NAME="ArchFiery"
+ID=arch
+BUILD_ID=rolling
+VERSION_ID=20231112.0.191179
+ANSI_COLOR="38;2;23;147;209"
+HOME_URL="https://github.com/MikuX-Dev"
+DOCUMENTATION_URL="https://github.com/MikuX-Dev"
+SUPPORT_URL="https://github.com/MikuX-Dev"
+BUG_REPORT_URL="https://github.com/MikuX-Dev"
+PRIVACY_POLICY_URL="https://github.com/MikuX-Dev"
+LOGO=archlinux-logo

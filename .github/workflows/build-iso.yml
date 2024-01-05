@@ -1,12 +1,10 @@
-# This workflow will build an Arch Linux ISO file with the commit on it
-
 name: Build Arch ISO with ArchInstall Commit
 
 on:
   push:
     branches:
       - master
-      - main # In case we adopt this convention in the future
+      - main # In case i adopt this convention in the future
   release:
     types:
       - created
@@ -19,13 +17,40 @@ jobs:
       options: --privileged
     steps:
       - uses: actions/checkout@v4
+      - name: setup pacman
+        run: |
+          pacman-key --init
+          pacman --noconfirm -Syy archlinux-keyring
+          pacman --noconfirm --needed -Sy reflector rsync curl wget git-lfs && \
+          reflector --latest 21 -f 21 -n 21 --age 21 --protocol https --download-timeout 55 --sort rate --save /etc/pacman.d/mirrorlist && \
+          pacman --noconfirm --needed -Syy openssh base-devel devtools sudo git namcap fakeroot audit grep diffutils
+          useradd -m -d /home/builder -s /bin/bash -G wheel builder && \
+          sed -i 's/^# %wheel ALL=(ALL:ALL) NOPASSWD: ALL/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/g' /etc/sudoers && \
+          echo "builder ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+          chown -R builder:builder /home/builder/
+      - name: Import SSH key
+        run: |
+          cd /home/builder
+          sudo -u builder bash -c '
+          mkdir -p archiso /tmp/work /home/builder/out
+          cp -r . /tmp/work
+          '
+      - run: ls -la /home/builder
       - run: pwd
       - run: find .
-      - run: cat /etc/os-release
-      - run: pacman-key --init
-      - run: pacman --noconfirm -Sy archlinux-keyring
-      - run: ./build-iso.sh
+      - run: sudo chown -R builder:builder .*
+      - run: |
+          if [ -d "/github" ]; then
+            sudo chown -R builder:builder /github/workspace /github/home
+          fi
+      - name: builds
+        run: |
+          cd /home/builder
+          pacman --noconfirm -S archiso mkinitcpio-archiso
+          git clone https://github.com/MikuX-Dev/custom-archiso.git
+          cp -r /home/builder/custom-archiso/profile /home/builder/archiso/
+          mkarchiso -v -w /tmp/work/ -o /home/builder/out/ ./archiso/profile
       - uses: actions/upload-artifact@v3
         with:
-          name: Arch Live ISO
-          path: /tmp/archlive/out/*.iso
+          name: ArchFiery ISO
+          path: /home/builder/out/*.iso
