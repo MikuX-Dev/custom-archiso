@@ -39,17 +39,15 @@ jobs:
       - run: pwd
       - run: find .
       - run: sudo chown -R builder:builder .*
-      - run: |
-          if [ -d "/github" ]; then
-            sudo chown -R builder:builder /github/workspace /github/home
-          fi
       - name: builds
         run: |
           cd /home/builder
+          sudo -u builder bash -c '
           pacman --noconfirm -S archiso mkinitcpio-archiso
           git clone https://github.com/MikuX-Dev/custom-archiso.git
           cp -r /home/builder/custom-archiso/profile /home/builder/archiso/
-          mkarchiso -v -w /tmp/work/ -o /home/builder/out/ ./archiso/profile
+          sudo mkarchiso -v -w /tmp/work/ -o /home/builder/out/ ./archiso/profile
+          '
       - uses: actions/upload-artifact@v3
         with:
           name: ArchFiery ISO
