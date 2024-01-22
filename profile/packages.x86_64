@@ -156,3 +156,6 @@ os-prober
 
 # archiver and compression
 xarchiver
+
+# needed
+intel-compute-runtime
