@@ -21,21 +21,18 @@ jobs:
         run: |
           cd /home/builder
           sudo -u builder bash -c '
-          mkdir -p archiso /tmp/work /home/builder/out
-          cp -r . /tmp/work
+          mkdir -p /tmp/work /home/builder/out
           '
       - run: ls -la /home/builder
       - run: pwd
       - run: find .
-      - run: sudo chown -R builder:builder .*
       - name: builds
         run: |
           cd /home/builder
           sudo -u builder bash -c '
           pacman --noconfirm -S archiso mkinitcpio-archiso
           git clone https://github.com/MikuX-Dev/custom-archiso.git
-          cp -r /home/builder/custom-archiso/profile /home/builder/archiso/
-          sudo mkarchiso -v -w /tmp/work/ -o /home/builder/out/ ./archiso/profile
+          sudo mkarchiso -v -w /tmp/work/ -o /home/builder/out/ ./custom-archiso/profile
           '
       - uses: actions/upload-artifact@v3
         with:
