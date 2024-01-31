@@ -50,7 +50,7 @@ custom live media, **releng** is used to create the monthly installation medium.
 The ISO includes:
 
 * Base Arch packages
-* XFCE Desktop environment
+* XFCE4 and AwesomeWM
 * NetworkManager for WiFi
 * Calamares installer
 * Extra utilities like neofetch, vim, git
@@ -66,7 +66,7 @@ Simply run this script.
 chmod +x build-iso.sh && ./build-iso.sh
 ```
 
-The generated ISO will be under ~/out
+The generated ISO will be under ./out
 
 ## Installation
 
@@ -74,11 +74,9 @@ Boot the ISO and launch the Calamares installer to install to a drive.
 
 ## Packages
 
-Base packages, XFCE, and extra utilities are included.
+Base packages, XFCE && AwesomeWM, and extra utilities are included.
 
 See ./profile/*/packages.x86_64 for the full list.
-
-AUR packages are built using yay and stored under ./aur_packages/
 
 ## Configuration
 
