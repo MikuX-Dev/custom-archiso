@@ -2,9 +2,7 @@ name: Build Arch ISO with ArchInstall Commit
 
 on:
   push:
-    branches:
-      - master
-      - main # In case i adopt this convention in the future
+    branches: [ bruh ] # [ master ]
   release:
     types:
       - created
@@ -17,12 +15,6 @@ jobs:
       options: --privileged
     steps:
       - uses: actions/checkout@v4
-      - name: Import SSH key
-        run: |
-          cd /home/builder
-          sudo -u builder bash -c '
-          mkdir -p /tmp/work /home/builder/out
-          '
       - run: ls -la /home/builder
       - run: pwd
       - run: find .
@@ -30,9 +22,7 @@ jobs:
         run: |
           cd /home/builder
           sudo -u builder bash -c '
-          pacman --noconfirm -S archiso mkinitcpio-archiso
-          git clone https://github.com/MikuX-Dev/custom-archiso.git
-          sudo mkarchiso -v -w /tmp/work/ -o /home/builder/out/ ./custom-archiso/profile
+          ./build-iso.sh
           '
       - uses: actions/upload-artifact@v3
         with:

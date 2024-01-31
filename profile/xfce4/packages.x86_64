@@ -4,7 +4,7 @@ amd-ucode
 arch-install-scripts
 archinstall
 b43-fwcutter
-base
+
 bind
 brltty
 broadcom-wl
@@ -125,6 +125,10 @@ xfsprogs
 xl2tpd
 zsh
 
+# base
+base
+base-devel
+
 #applications
 gvfs
 neofetch
@@ -160,10 +164,20 @@ xarchiver
 # needed
 intel-compute-runtime
 
-# Social 
+# Social
 telegram-desktop
 signal-desktop
 
 # Note-taking
 obsidian
 
+# Meta package
+electron28
+gcc
+ccache
+cmake
+make
+gdb
+go
+glibc
+rustup

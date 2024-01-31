@@ -2,6 +2,10 @@
 # ~/.zshrc
 #
 
+# script that runs before
+# neofetch
+random_script_runner
+
 # Created by newuser for 5.9
 eval "$(starship init zsh)"
 

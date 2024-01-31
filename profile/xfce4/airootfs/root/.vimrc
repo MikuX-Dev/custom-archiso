@@ -1,10 +1,6 @@
-"  ____ _____
-" |  _ \_   _|  Derek Taylor (DistroTube)
-" | | | || |    http://www.youtube.com/c/DistroTube
-" | |_| || |    http://www.gitlab.com/dwt1/
-" |____/ |_|
 "
-" A customized .vimrc for vim (https://www.vim.org/)
+" ~/.vimrc
+"
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -14,7 +10,7 @@ filetype off                  " required
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Check if Vim-plug is installed, if not, install it
 if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs 
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | so ~/.vimrc
 endif
@@ -155,7 +151,7 @@ call plug#begin('~/.vim/plugged')
     " Install plugins if missing
     autocmd VimEnter *
       \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-      \|   PlugInstall --sync | source $MYVIMRC 
+      \|   PlugInstall --sync | source $MYVIMRC
       \| endif
 
 call plug#end()
