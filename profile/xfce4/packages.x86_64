@@ -129,11 +129,14 @@ zsh
 base
 base-devel
 
-#applications
+# applications
 gvfs
 neofetch
 galculator
 xdotool
+
+# theme
+dracula-gtk-theme
 
 # XFCE
 xfce4
